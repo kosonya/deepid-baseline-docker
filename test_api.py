@@ -241,7 +241,9 @@ def test_api_compliance():
     print("API compliance test passed!")
 
 
-if __name__ == "__main__":
+
+
+def main():
     # Run the tests
     print("Testing API compliance...")
 
@@ -257,6 +259,7 @@ if __name__ == "__main__":
         except (AssertionError, requests.exceptions.ConnectionError) as e:
             print(f"✗ Detection endpoints test failed: {e}")
             detection_implemented = False
+        return
 
         # Test localization endpoint
         try:
@@ -288,3 +291,9 @@ if __name__ == "__main__":
 
     except Exception as e:
         print(f"✗ Test failed: {e}")
+
+
+
+
+if __name__ == "__main__":
+    main()
