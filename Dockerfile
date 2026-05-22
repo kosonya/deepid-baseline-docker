@@ -7,10 +7,11 @@ FROM pytorch/pytorch:2.6.0-cuda12.6-cudnn9-runtime
 
 WORKDIR /app
 
-# TODO: Copy the weights here
-RUN apt-get update && apt-get install -y unzip
-ADD https://www.grip.unina.it/download/prog/TruFor/TruFor_weights.zip .
-RUN unzip -q -n TruFor_weights.zip && rm TruFor_weights.zip
+# TruFor weights are NOT baked into the image. They arrive at runtime via a
+# bind-mount on /app/weights (see docker-compose.yml). The host bootstrap
+# script `setup.sh` is responsible for populating
+# /opt/sophia-work-trial/deepid-baseline-docker/weights/ before the
+# container starts.
 
 # Install dependencies
 COPY requirements.txt .

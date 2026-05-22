@@ -9,6 +9,12 @@ services:
     platform: linux/amd64
     ports:
       - "8000:8000"
+    # TruFor weights live on the host under
+    # /opt/sophia-work-trial/deepid-baseline-docker/weights (populated by
+    # setup.sh) and are bind-mounted read-only at /app/weights — where
+    # src/model.py expects to find trufor.pth.tar.
+    volumes:
+      - /opt/sophia-work-trial/deepid-baseline-docker/weights:/app/weights:ro
     deploy:
       resources:
         reservations:
